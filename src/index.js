@@ -23,20 +23,32 @@ function renderImages(images) {
   });
 }
 
-function renderBreeds(breeds) {
-  breedsList = Object.keys(breeds.message)
+// turn the breeds into an array
+function renderBreeds(json) {
+  breedsList = Object.keys(json.message)
+  filterBreeds(breedsList)
+}
+
+// takes the list and returns new array of filtered breeds
+function listBreed(filteredBreeds) {
   let list = document.getElementById('dog-breeds');
-  breedsList.forEach(dog => {
+  list.innerHTML = '';
+  filteredBreeds.forEach(dog => {
     let doggo_breed = document.createElement('li')
-    doggo_breed.textContent = "Hello";
     doggo_breed.textContent = `${dog}`
     doggo_breed.addEventListener('click', changeColor)
     list.appendChild(doggo_breed)
   });
 }
 
-function filterBreeds() {
-
+function filterBreeds(breeds) {
+  console.log(breeds)
+  let dropdown = document.getElementById('breed-dropdown');
+  let list = document.getElementById('dog-breeds');
+  dropdown.addEventListener('change', function() {
+    let filtered = breeds.filter(breed => breed[0] === dropdown.value);
+    listBreed(filtered);
+  })
 }
 
 function changeColor(e) {
@@ -46,5 +58,4 @@ function changeColor(e) {
 document.addEventListener('DOMContentLoaded', function() {
   fetchImages()
   fetchBreeds()
-  // filterBreeds()
 })
