@@ -2,7 +2,6 @@ console.log('%c HI', 'color: firebrick')
 
 const imgUrl = "https://dog.ceo/api/breeds/image/random/4";
 const breedUrl = 'https://dog.ceo/api/breeds/list/all';
-const dropdown = document.querySelector("#breed-dropdown")
 let breeds = document.querySelector('ul#dog-breeds')
 
 document.addEventListener("DOMContentLoaded", function(){
@@ -52,13 +51,3 @@ function changeTextColor(x){
         x.target.style.color = 'red';
     }
 }
-
-dropdown.addEventListener('change', (e) => {
-    const ul = document.querySelector('ul#dog-breeds')
-    const list = ul.querySelectorAll('li')
-    list.forEach(item => {
-        if(item.innerText.charAt(0) !== e.target.value){
-            console.log
-        }
-    })
-});
