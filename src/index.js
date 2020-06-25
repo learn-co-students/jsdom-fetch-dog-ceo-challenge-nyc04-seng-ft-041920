@@ -1,6 +1,9 @@
+let dogBreeds = [];
 
 fetchDogImg();
 fetchDogBreeds();
+// filterDogs();
+
 
 //Challenge 1
 
@@ -30,17 +33,20 @@ function fetchDogBreeds() {
         return response.json();
     })
     .then(function(json) {
-        // console.log(json.message)
-        renderDogBreeds(json)
+        dogObjectKeys = Object.keys(json.message)
+        //instead of pushing each value, adding dogObjectKeys array into dogBreeds using splice
+        dogBreeds.splice(0, 1, ...dogObjectKeys)
+        renderDogBreeds(dogBreeds);
+        filterDogs();
     })  
 }
 
 function renderDogBreeds(dogs) {
     const dogBreedContainer = document.querySelector("#dog-breeds");
-    dogObjectKeys =  Object.keys(dogs.message)
-    dogObjectKeys.forEach(function(dog){
+    // dogObjectKeys =  Object.keys(dogs.message)
+    dogs.forEach(function(breed){
         const dogBreed = document.createElement("li")
-        dogBreed.textContent = dog
+        dogBreed.textContent = breed
         dogBreedContainer.append(dogBreed)
 //Challenge 3
         dogBreed.addEventListener("click", function(e) {
@@ -50,4 +56,32 @@ function renderDogBreeds(dogs) {
 }
 
 //Challenge 4 - To Do
+//only show dog breeds starting with dropdown letters
+//put a dog breeds array globally ? refactor renderDogBreeds
 
+//not sure why I made this but it's here
+function renderReset() {
+    const dogBreedContainer = document.querySelector("#dog-breeds");
+    const dogLis = dogBreedContainer.querySelectorAll("li");
+    dogLis.forEach(function(li) {
+        li.style.display = "none";
+    })
+}
+
+
+function filterDogs() {
+        const dogBreedContainer = document.querySelector("#dog-breeds");
+        const dogLis = dogBreedContainer.querySelectorAll("li");
+        let dropDown = document.querySelector("#breed-dropdown");
+        dropDown.addEventListener("change", function(e) {
+        let letter = dropDown.value; 
+        renderReset();
+        dogLis.forEach(function(li) {
+            if (li.textContent[0] === letter) {
+                li.style.display = "list-item"
+            }
+        })
+    })
+}
+
+//this all needs to be refactored
