@@ -43,7 +43,6 @@ function fetchDogBreeds() {
 
 function renderDogBreeds(dogs) {
     const dogBreedContainer = document.querySelector("#dog-breeds");
-    // dogObjectKeys =  Object.keys(dogs.message)
     dogs.forEach(function(breed){
         const dogBreed = document.createElement("li")
         dogBreed.textContent = breed
@@ -57,16 +56,16 @@ function renderDogBreeds(dogs) {
 
 //Challenge 4 - To Do
 //only show dog breeds starting with dropdown letters
-//put a dog breeds array globally ? refactor renderDogBreeds
 
 //not sure why I made this but it's here
-function renderReset() {
-    const dogBreedContainer = document.querySelector("#dog-breeds");
-    const dogLis = dogBreedContainer.querySelectorAll("li");
-    dogLis.forEach(function(li) {
-        li.style.display = "none";
-    })
-}
+//this can be removed and the logic for filterDogs can simply hide any non-matches
+// function renderReset() {
+//     const dogBreedContainer = document.querySelector("#dog-breeds");
+//     const dogLis = dogBreedContainer.querySelectorAll("li");
+//     dogLis.forEach(function(li) {
+//         li.style.display = "none";
+//     })
+// }
 
 
 function filterDogs() {
@@ -75,13 +74,14 @@ function filterDogs() {
         let dropDown = document.querySelector("#breed-dropdown");
         dropDown.addEventListener("change", function(e) {
         let letter = dropDown.value; 
-        renderReset();
         dogLis.forEach(function(li) {
-            if (li.textContent[0] === letter) {
+            if (li.textContent[0] !== letter) {
+                li.style.display = "none"
+            }
+            else {
                 li.style.display = "list-item"
             }
         })
     })
 }
 
-//this all needs to be refactored
