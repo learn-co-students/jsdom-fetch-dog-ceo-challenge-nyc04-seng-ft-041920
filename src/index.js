@@ -56,6 +56,7 @@ function addBreed(breed){
 
 const filterList = document.querySelector('#breed-dropdown')
 filterList.addEventListener('change', e => {
+  console.log(e.target.value)
   const newBreeds = filterBreed(e.target.value)
   updateBreed(newBreeds)
 })
@@ -67,8 +68,11 @@ function filterBreed(letter){
 
 function updateBreed(newBreeds){
   const breedList = document.querySelector('#dog-breeds')
-   //debugger
-  breedList.innerHTML = ""
+  //debugger
+  // breedList.innerHTML = ""	
+  while ( breedList.firstChild ) {
+    breedList.removeChild( breedList.firstChild );
+  }
   
   newBreeds.forEach(breed => { 
     let li = document.createElement('li')
