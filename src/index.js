@@ -63,8 +63,6 @@ fetch('https://dog.ceo/api/breeds/list/all')
         }
     })
 }
-
-
 populateBreed();
 
 let dropdown = document.querySelector("#breed-dropdown")
